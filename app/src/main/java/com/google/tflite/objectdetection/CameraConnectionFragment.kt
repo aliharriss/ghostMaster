@@ -224,6 +224,7 @@ class CameraConnectionFragment private constructor(
     }
 
     /** Opens the camera specified by [CameraConnectionFragment.cameraId].  */
+    @SuppressLint("MissingPermission")
     private fun openCamera(width: Int, height: Int) {
         setUpCameraOutputs()
         configureTransform(width, height)

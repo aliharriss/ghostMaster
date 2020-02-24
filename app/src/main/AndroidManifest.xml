@@ -23,6 +23,11 @@
             android:name="com.google.tflite.objectdetection.DetectorActivity"
             android:label="@string/activity_name_detection"
             android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="com.google.tflite.objectdetection.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/activity_name_detection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
