@@ -22,8 +22,6 @@ import android.graphics.Paint.Style
 import android.media.ImageReader.OnImageAvailableListener
 import android.os.SystemClock
 import android.util.DisplayMetrics
-import android.util.Half.toFloat
-import android.util.Log
 import android.util.Size
 import android.util.TypedValue
 import android.view.View
@@ -40,13 +38,6 @@ import com.google.tflite.objectdetection.tracking.MultiBoxTracker
 import org.tensorflow.lite.examples.detection.R
 import java.io.IOException
 import java.util.*
-import kotlin.reflect.typeOf
-import android.R.attr.bottom
-import android.R.attr.top
-import android.R.attr.right
-import android.R.attr.left
-
-
 
 
 /**
@@ -257,4 +248,6 @@ class DetectorActivity : CameraActivity(), OnImageAvailableListener {
         private val DESIRED_PREVIEW_SIZE = Size(640, 480)
         private const val TEXT_SIZE_DIP = 10f
     }
+
+
 }

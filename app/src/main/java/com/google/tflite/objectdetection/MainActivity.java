@@ -1,5 +1,6 @@
 package com.google.tflite.objectdetection;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -12,10 +13,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.tflite.objectdetection.tracking.CommunityFragment;
-import com.google.tflite.objectdetection.tracking.SettingsFragment;
-import com.google.tflite.objectdetection.tracking.StatsFragment;
-import com.google.tflite.objectdetection.tracking.TrainFragment;
+import com.google.tflite.objectdetection.tracking.Fragments.CommunityFragment;
+import com.google.tflite.objectdetection.tracking.Fragments.SettingsFragment;
+import com.google.tflite.objectdetection.tracking.Fragments.StatsFragment;
+import com.google.tflite.objectdetection.tracking.Fragments.TrainFragment;
 
 import org.tensorflow.lite.examples.detection.R;
 
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new TrainFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_train);
         }
+    }
+
+    public void openDetector() {
+        Intent intent = new Intent(this, DetectorActivity.class);
+        startActivity(intent);
     }
 
     @Override
