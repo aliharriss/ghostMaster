@@ -13,10 +13,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.tflite.objectdetection.tracking.Fragments.CommunityFragment;
-import com.google.tflite.objectdetection.tracking.Fragments.SettingsFragment;
-import com.google.tflite.objectdetection.tracking.Fragments.StatsFragment;
-import com.google.tflite.objectdetection.tracking.Fragments.TrainFragment;
+import com.google.tflite.objectdetection.Fragments.CommunityFragment;
+import com.google.tflite.objectdetection.Fragments.SettingsFragment;
+import com.google.tflite.objectdetection.Fragments.StatsFragment;
+import com.google.tflite.objectdetection.Fragments.TrainFragment;
 
 import org.tensorflow.lite.examples.detection.R;
 

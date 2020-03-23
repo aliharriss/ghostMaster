@@ -29,7 +29,7 @@ import java.util.*
 import kotlin.math.min
 
 /** A tracker that handles non-max suppression and matches existing objects to new detections.  */
-class MultiBoxTracker(context: Context) {
+class  MultiBoxTracker(context: Context) {
     private val screenRects: MutableList<Pair<Float, RectF>> = LinkedList()
     private val logger = Logger()
     private val availableColors = LinkedList<Int>()

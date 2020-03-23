@@ -1,4 +1,4 @@
-package com.google.tflite.objectdetection.tracking.Fragments;
+package com.google.tflite.objectdetection.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
