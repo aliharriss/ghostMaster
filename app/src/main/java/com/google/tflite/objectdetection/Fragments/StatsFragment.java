@@ -9,26 +9,20 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.tflite.objectdetection.DetectorActivity;
 
 import org.tensorflow.lite.examples.detection.R;
 
-import java.util.ArrayList;
-
-public class TrainFragment extends Fragment {
+public class StatsFragment extends Fragment {
     // Start the detector activity
     Button button;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
-    ArrayList<String> items;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Start the detector activity
-        View v = inflater.inflate(R.layout.fragment_train, container, false);
+        View v = inflater.inflate(R.layout.fragment_stats, container, false);
 
         // Start the detector activity
         button = v.findViewById(R.id.buttonTrain);

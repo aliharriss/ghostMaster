@@ -1,6 +1,5 @@
 package com.google.tflite.objectdetection;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.tflite.objectdetection.Fragments.CommunityFragment;
 import com.google.tflite.objectdetection.Fragments.SettingsFragment;
 import com.google.tflite.objectdetection.Fragments.StatsFragment;
-import com.google.tflite.objectdetection.Fragments.TrainFragment;
+import com.google.tflite.objectdetection.Fragments.TrainFragment1;
 
 import org.tensorflow.lite.examples.detection.R;
 
@@ -30,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.setTitle("Train");
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -42,32 +42,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new TrainFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_train);
+                    new TrainFragment1()).commit();
+            navigationView.setCheckedItem(R.id.nav_train1);
         }
-    }
-
-    public void openDetector() {
-        Intent intent = new Intent(this, DetectorActivity.class);
-        startActivity(intent);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_train:
+            case R.id.nav_train1:
+                this.setTitle("Train");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new TrainFragment()).commit();
+                        new TrainFragment1()).commit();
                 break;
             case R.id.nav_community:
+                this.setTitle("Community");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).commit();
                 break;
             case R.id.nav_stats:
+                this.setTitle("Stats");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new StatsFragment()).commit();
                 break;
             case R.id.nav_settings:
+                this.setTitle("Settings");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingsFragment()).commit();
                 break;
