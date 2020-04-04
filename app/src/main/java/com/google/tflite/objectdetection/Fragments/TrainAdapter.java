@@ -19,6 +19,7 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
 
     public interface OnItemClickListener {
         void onStartClick(int position);
+        void onEditClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -26,24 +27,36 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
     }
 
     public static class TrainViewHolder extends RecyclerView.ViewHolder{
-        public ImageView mImageView1;
-        public ImageView mImageView2;
+        public ImageView mImageViewEdit;
+        public ImageView mImageViewStart;
         public TextView mTextView1;
 
         public TrainViewHolder (@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
-            mImageView1 = itemView.findViewById(R.id.imageViewEdit);
-            mImageView2 = itemView.findViewById(R.id.imageViewStart);
+            mImageViewEdit = itemView.findViewById(R.id.imageViewEdit);
+            mImageViewStart = itemView.findViewById(R.id.imageViewStart);
             mTextView1 = itemView.findViewById(R.id.textView1);
 
-
-            mImageView2.setOnClickListener(new View.OnClickListener(){
+            // Create
+            mImageViewStart.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
                             listener.onStartClick(position);
+                        }
+                    }
+                }
+            });
+
+            mImageViewEdit.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onEditClick(position);
                         }
                     }
                 }
@@ -67,8 +80,8 @@ public class TrainAdapter extends RecyclerView.Adapter<TrainAdapter.TrainViewHol
     public void onBindViewHolder(@NonNull TrainViewHolder holder, int position) {
         TrainItem currentItem = mTrainList.get(position);
 
-        holder.mImageView1.setImageResource(currentItem.getmImageResource1());
-        holder.mImageView2.setImageResource(currentItem.getmImageResource2());
+        holder.mImageViewEdit.setImageResource(currentItem.getmImageResource1());
+        holder.mImageViewStart.setImageResource(currentItem.getmImageResource2());
         holder.mTextView1.setText(currentItem.getText1());
     }
 
