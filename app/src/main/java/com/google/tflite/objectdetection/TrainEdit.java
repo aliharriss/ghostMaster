@@ -2,7 +2,6 @@ package com.google.tflite.objectdetection;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.google.tflite.objectdetection.Fragments.TrainItem;
 
 import org.tensorflow.lite.examples.detection.R;
@@ -67,10 +65,5 @@ public class TrainEdit extends AppCompatActivity {
         Toast.makeText(this,"Saved", Toast.LENGTH_SHORT).show();
     }
 
-    public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        //String json = gson.toJson(mTrainList);
-    }
+
 }

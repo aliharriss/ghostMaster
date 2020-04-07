@@ -1,6 +1,7 @@
 package com.google.tflite.objectdetection.Fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.tflite.objectdetection.TrainEdit;
 
 import org.tensorflow.lite.examples.detection.R;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Objects;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class TrainFragment1 extends Fragment {
     @Nullable
@@ -29,29 +35,39 @@ public class TrainFragment1 extends Fragment {
     private LinearLayoutManager mLayoutManager;
     private ArrayList<TrainItem> mTrainList;
 
-    public static final String EXTRA_NUMBER = "com.google.tflite.objectdetection.EXTRA_NUMBER";
-
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_train1, container, false);
 
-        //Load shared preferences (train item settings)
+        SharedPreferences prefs = getContext().getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        boolean firstStart = prefs.getBoolean("firstStart", true);
 
-        //Create Example List and build it
-        createTrainList();
+        // if it's the first launch, save default data, else load data
+        if (firstStart) {
+            Toast.makeText(getContext(), "save data",Toast.LENGTH_SHORT).show();
+            createTrainList();
+            saveData();
+            editor.putBoolean("firstStart", false).apply();
+        } else {
+            Toast.makeText(getContext(), "load data",Toast.LENGTH_SHORT).show();
+            loadData();
+        }
+
+        // build the example list
         buildRecyclerView(v);
-
         return v;
     }
 
     public void createTrainList() {
-        // Only do this on the first
+        // Only create default train list on the first app launch
         mTrainList = new ArrayList<>();
         mTrainList.add(new TrainItem(R.drawable.ic_menu_manage, R.drawable.ic_play, "Front Court"));
         mTrainList.add(new TrainItem(R.drawable.ic_menu_manage, R.drawable.ic_play, "Balanced"));
         mTrainList.add(new TrainItem(R.drawable.ic_menu_manage, R.drawable.ic_play, "Back Court"));
     }
 
-    public void buildRecyclerView(View v) {        mRecyclerView = v.findViewById(R.id.recyclerView);
+    public void buildRecyclerView(View v) {
+        mRecyclerView = v.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new TrainAdapter(mTrainList);
@@ -78,5 +94,26 @@ public class TrainFragment1 extends Fragment {
                startActivity(intent);
            }
         });
+    }
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mTrainList);
+        editor.putString("train list", json);
+        editor.apply();
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("train list", null);
+        Type type = new TypeToken<ArrayList<TrainItem>>() {}.getType();
+        mTrainList = gson.fromJson(json, type);
+
+        if (mTrainList == null) {
+            mTrainList = new ArrayList<>();
+        }
     }
 }
